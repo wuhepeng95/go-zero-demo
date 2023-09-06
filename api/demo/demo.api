@@ -6,7 +6,31 @@ type Response {
 	Message string `json:"message"`
 }
 
+type (
+	VpcGetAllReq {
+		Name             string   `json:"name"`
+		Owner            string   `json:"owner"`
+		Region           string   `json:"region"`
+		ContainedTags    []string `json:"containedTags"`
+		NotContainedTags []string `json:"notContainedTags"`
+		Limit            int32    `json:"limit"`
+		Offset           int32    `json:"offset"`
+	}
+	VpcGetAllResp {
+		Total int32 `json:"total"`
+	}
+)
+
 service demo-api {
 	@handler DemoHandler
-	get /from/:name(Request) returns (Response)
+	get /from/:name (Request) returns (Response)
+}
+
+@server(
+	prefix: cloud/hw/v1
+	group: hwcloud/vpc
+)
+service demo-api {
+	@handler VpcGetAll
+	post /vpc/all (VpcGetAllReq) returns (VpcGetAllResp)
 }

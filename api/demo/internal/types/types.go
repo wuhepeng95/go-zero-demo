@@ -8,3 +8,17 @@ type Request struct {
 type Response struct {
 	Message string `json:"message"`
 }
+
+type VpcGetAllReq struct {
+	Name             string   `json:"name"`
+	Owner            string   `json:"owner"`
+	Region           string   `json:"region"`
+	ContainedTags    []string `json:"containedTags"`
+	NotContainedTags []string `json:"notContainedTags"`
+	Limit            int32    `json:"limit"`
+	Offset           int32    `json:"offset"`
+}
+
+type VpcGetAllResp struct {
+	Total int32 `json:"total"`
+}
